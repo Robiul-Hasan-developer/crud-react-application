@@ -15,6 +15,10 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
     const name = evt.target.name;
     let value = evt.target.value;
 
+    if(name === "tags") {
+      value = value.split(' ');
+    }
+    
     setTask({
       ...task,
       [name]: value,
@@ -43,14 +47,14 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
           Add New Task
         </h2>
         {/* inputs */}
-        <div className="space-y-9 text-white lg:space-y-10">
+        <div className="space-y-6 text-white">
           {/* title */}
           <div className="space-y-2 lg:space-y-3">
             <label className="mb-2 font-medium block" htmlFor="title">
               Title
             </label>
             <input
-              className="block w-full rounded-md bg-[#2D323F] border border-white/25 border-[1px] !outline-0 px-3 py-2.5"
+              className="block w-full rounded-md bg-[#2D323F] border border-white/25 focus:border-white/80 border-[1px] !outline-0 px-3 py-2.5"
               type="text"
               name="title"
               id="title"
@@ -66,7 +70,7 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
               Description
             </label>
             <textarea
-              className="block min-h-[120px] w-full rounded-md bg-[#2D323F] border border-white/25 border-[1px] !outline-0 px-3 py-2.5 lg:min-h-[180px]"
+              className="block min-h-[100px] w-full rounded-md bg-[#2D323F] border border-white/25 focus:border-white/80 border-[1px] !outline-0 px-3 py-2.5"
               type="text"
               name="description"
               id="description"
@@ -77,14 +81,14 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
             ></textarea>
           </div>
           {/* input group */}
-          <div className="grid-cols-2 gap-x-4 max-md:space-y-9 md:grid lg:gap-x-10 xl:gap-x-20">
+          <div className="grid-cols-2 gap-x-6 grid">
             {/* tags */}
             <div className="space-y-2 lg:space-y-3">
               <label className="mb-2 font-medium block" htmlFor="tags">
                 Tags
               </label>
               <input
-                className="block w-full rounded-md bg-[#2D323F] border border-white/25 border-[1px] !outline-0 px-3 py-2.5"
+                className="block w-full rounded-md bg-[#2D323F] border border-white/25 focus:border-white/80 border-[1px] !outline-0 px-3 py-2.5"
                 type="text"
                 name="tags"
                 id="tags"
@@ -100,7 +104,7 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
                 Priority
               </label>
               <select
-                className="block w-full cursor-pointer rounded-md bg-[#2D323F] border border-white/25 border-[1px] !outline-0 px-3 py-2.5"
+                className="block w-full cursor-pointer rounded-md bg-[#2D323F] border border-white/25 focus:border-white/80 border-[1px] !outline-0 px-3 py-2.5"
                 name="priority"
                 id="priority"
                 onChange={handleChange}
@@ -116,13 +120,13 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
           </div>
         </div>
         {/* inputs ends */}
-        <div className="mt-16 flex justify-center lg:mt-20">
+        <div className="mt-8 flex justify-center lg:mt-10">
           <button
             type="submit"
-            className="rounded bg-blue-600 px-4 py-2 text-white transition-all hover:opacity-80"
+            className="rounded-md bg-blue-500 hover:bg-blue-600 active:scale-95 duration-100 px-8 py-3 text-base font-semibold text-white"
             // onClick={() => onHandleAddTask(task)}
           >
-            Create new Task
+            Add new Task
           </button>
         </div>
       </form>

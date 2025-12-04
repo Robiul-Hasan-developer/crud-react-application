@@ -19,9 +19,7 @@ const defaultTasks = [
 
 const TaskBoard = () => {
   const [tasks, setTasks] = useState(defaultTasks);
-  const [showModal, setShowModal] = useState(true);
-  const [isFavorite, setIsFavorite] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
 
   // Handle Show Modal function
   const handleShowModal = () => {
@@ -55,8 +53,13 @@ const TaskBoard = () => {
   }
 
   // Handle is favorite toggle function
-  const handleIsFavorite = () => {
-    setIsFavorite(!isFavorite)
+  const handleIsFavorite = (taskId) => {
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+
+    const newTasks = [...tasks];
+    newTasks[taskIndex].isFavorite = !newTasks[taskIndex].isFavorite
+    
+    setTasks(newTasks)
   }
 
   return (
@@ -78,7 +81,7 @@ const TaskBoard = () => {
 
             {
              tasks.length > 0 ? (
-              <TaskList tasks={tasks} onHandleDeleteItem={handleDeleteItem} onHandleIsFavorite={handleIsFavorite} isFavorite={isFavorite} />
+              <TaskList tasks={tasks} onHandleDeleteItem={handleDeleteItem} onHandleIsFavorite={handleIsFavorite} />
               )  :  <NoDataFound />
             }
           </div>

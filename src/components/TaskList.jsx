@@ -1,6 +1,6 @@
 import { SquarePen, Star, Trash } from "lucide-react";
 
-const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite, isFavorite }) => {
+const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite }) => {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -29,26 +29,31 @@ const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite, isFavorite })
           {tasks.map((task) => (
             <tr
               key={task.id}
-              className="border-b border-neutral-300 [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
+              className="border-b border-neutral-300 [&>td]:align-baseline [&>td]:px-4 [&>td]:py-5"
             >
               {/* Star */}
-              <td className="!align-middle !py-5 px-4 text-start">
+              <td className="!align-middle text-start">
                 <button
                   type="button"
-                  className={`text-neutral-500 ${isFavorite ? 'text-yellow-500' : ''}`}
-                  onClick={onHandleIsFavorite}
+                  onClick={() => onHandleIsFavorite(task.id)}
                 >
-                  <Star className="size-5" fill="currentColor" />
+                  {
+                    task.isFavorite ? (
+                      <Star className="size-5 text-yellow-500" fill="currentColor" />
+                    ) : (
+                      <Star className="size-5 text-neutral-500" fill="currentColor" />
+                    )
+                  }
                 </button>
               </td>
 
               {/* Title */}
-              <td className="!align-middle !py-5 px-4 text-start">
+              <td className="!align-middle text-start">
                 {task.title}
               </td>
 
               {/* Description */}
-              <td className="!align-middle !py-5 px-4 text-start">
+              <td className="!align-middle text-start">
                 <div>{task.description}</div>
               </td>
 
@@ -66,7 +71,7 @@ const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite, isFavorite })
               </td>
 
               {/* Priority */}
-              <td className="!align-middle !py-5 px-4 text-start">
+              <td className="!align-middle text-start">
                 <span
                   className={`px-4 py-1 text-sm font-semibold rounded flex justify-center capitalize
                     ${task.priority === "high" && "text-green-600 bg-green-100"}

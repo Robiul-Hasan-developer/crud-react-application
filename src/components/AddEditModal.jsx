@@ -123,8 +123,7 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
         <div className="mt-8 flex justify-center lg:mt-10">
           <button
             type="submit"
-            className="rounded-md bg-blue-500 hover:bg-blue-600 active:scale-95 duration-100 px-8 py-3 text-base font-semibold text-white"
-            // onClick={() => onHandleAddTask(task)}
+            className="w-full rounded-md bg-blue-500 hover:bg-blue-600 active:scale-95 duration-100 px-8 py-3 text-base font-semibold text-white"
           >
             Add new Task
           </button>

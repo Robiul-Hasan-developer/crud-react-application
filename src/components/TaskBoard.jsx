@@ -17,6 +17,7 @@ const defaultTasks = [
   },
 ];
 
+
 const TaskBoard = () => {
   const [tasks, setTasks] = useState(defaultTasks);
   const [showModal, setShowModal] = useState(false);
@@ -26,10 +27,12 @@ const TaskBoard = () => {
     setShowModal(!showModal);
   };
 
+
   // Handle Remove Modal function
   const handleRemoveModal = () => {
     setShowModal(false);
   };
+
 
  // Handle Add New Task function
   const handleAddTask = (newTask) => {
@@ -38,12 +41,13 @@ const TaskBoard = () => {
   };
 
 
-  // handle Edit Taks
+  // handle Edit Task
   const handleEditTask = (task) => {
     console.log(task);
     
     
   }
+
 
   // Handle Item delete function
   const handleDeleteItem = (itemId) => {
@@ -52,12 +56,14 @@ const TaskBoard = () => {
     )
   }
 
+
   // Handle delete all item function
   const handleDeleteAllItem = () => {
     setTasks([]);
     // tasks.length = 0;
     // setTasks([...tasks]);
   }
+
 
   // Handle is favorite toggle function
   const handleIsFavorite = (taskId) => {
@@ -68,6 +74,7 @@ const TaskBoard = () => {
     
     setTasks(newTasks)
   }
+
 
   return (
     <>
@@ -104,3 +111,25 @@ const TaskBoard = () => {
 };
 
 export default TaskBoard;
+
+
+
+
+/*
+==================== Kow more details about this?
+* event loop details.
+* tell me details about mutable & immutable value.
+* React component lifecycle
+* How react restory redering component?
+* how javascript execute the code
+* deep copy & shallow copy
+* cookie & sessionStorage -> Computer
+* what exicutation context
+* prototype
+* HOC ki??
+* hoisting ki??
+* Redux??
+
+=================== Aamke aro ki ki janete hobe =================
+Javascript -> OOP -> Design Pattern -> 
+ */

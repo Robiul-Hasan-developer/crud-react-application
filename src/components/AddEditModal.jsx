@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 
-const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
-  const [task, setTask] = useState({
+const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal, taskToUpdate }) => {
+  const [task, setTask] = useState(taskToUpdate || {
     id: crypto.randomUUID(),
     title: "",
     description: "",
@@ -11,6 +11,9 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
     isFavorite: false,
   });
 
+  const [isAdd, setIsAdd] = useState(Object.is(taskToUpdate, null));
+  
+  
   const handleChange = (evt) => {
     const name = evt.target.name;
     let value = evt.target.value;
@@ -39,12 +42,13 @@ const AddEditModal = ({ onHandleAddTask, onHandleRemoveModal }) => {
         action="#"
         onSubmit={(e) => {
           e.preventDefault();
-          onHandleAddTask(task);
+          onHandleAddTask(task, isAdd);
         }}
       >
         {/* <form action="#"> */}
         <h2 className="mb-8 text-center text-2xl font-bold text-white lg:mb-8 lg:text-[28px]">
-          Add New Task
+          {isAdd ? 'Add New Task' : 'Edit Task' }
+          
         </h2>
         {/* inputs */}
         <div className="space-y-6 text-white">

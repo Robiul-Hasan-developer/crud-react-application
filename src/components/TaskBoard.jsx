@@ -21,6 +21,7 @@ const defaultTasks = [
 const TaskBoard = () => {
   const [tasks, setTasks] = useState(defaultTasks);
   const [showModal, setShowModal] = useState(false);
+  const [taskToUpdate, setTaskToUpdate] = useState(null);
 
   // Handle Show Modal function
   const handleShowModal = () => {
@@ -28,25 +29,40 @@ const TaskBoard = () => {
   };
 
 
-  // Handle Remove Modal function
-  const handleRemoveModal = () => {
-    setShowModal(false);
-  };
-
-
  // Handle Add New Task function
-  const handleAddTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+  const handleAddTask = (newTask, isAdd) => {
+    if(isAdd) {
+      setTasks([...tasks, newTask]);
+    } else {
+      setTasks(
+        tasks.map((task) => {
+          if(task.id == newTask.id) {
+            return newTask
+          }
+          return task;
+        })
+      )
+    }
     setShowModal(false);
   };
 
 
   // handle Edit Task
   const handleEditTask = (task) => {
+    setTaskToUpdate(task)
+    setShowModal(true);
+
     console.log(task);
-    
-    
   }
+
+
+  
+  // Handle Remove Modal function
+  const handleRemoveModal = () => {
+    setShowModal(false);
+    setTaskToUpdate(null)
+  };
+
 
 
   // Handle Item delete function
@@ -83,6 +99,7 @@ const TaskBoard = () => {
         <AddEditModal
           onHandleAddTask={handleAddTask}
           onHandleRemoveModal={handleRemoveModal}
+          taskToUpdate={taskToUpdate}
         />
       )}
 
@@ -111,6 +128,34 @@ const TaskBoard = () => {
 };
 
 export default TaskBoard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

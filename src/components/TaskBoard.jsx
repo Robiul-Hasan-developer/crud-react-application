@@ -13,93 +13,88 @@ const defaultTasks = [
     description: "Connect an existing API to external database securely.",
     tags: ["Web", "Python", "API"],
     priority: "High",
-    isFavorite: false
+    isFavorite: false,
   },
 ];
-
 
 const TaskBoard = () => {
   const [tasks, setTasks] = useState(defaultTasks);
   const [showModal, setShowModal] = useState(false);
   const [taskToUpdate, setTaskToUpdate] = useState(null);
+  const [allTasks, setAllTasks] = useState(defaultTasks);
 
   // Handle Show Modal function
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
 
-
- // Handle Add New Task function
+  // Handle Add New Task function
   const handleAddTask = (newTask, isAdd) => {
-    if(isAdd) {
+    if (isAdd) {
       setTasks([...tasks, newTask]);
+      setAllTasks([...allTasks, newTask]);
     } else {
-      setTasks(
-        tasks.map((task) => {
-          if(task.id == newTask.id) {
-            return newTask
-          }
-          return task;
-        })
-      )
+      const updated = allTasks.map((task) =>
+        task.id === newTask.id ? newTask : task
+      );
+
+      setTasks(updated);
+      setAllTasks(updated);
     }
     setShowModal(false);
   };
 
-
   // handle Edit Task
   const handleEditTask = (task) => {
-    setTaskToUpdate(task)
+    setTaskToUpdate(task);
     setShowModal(true);
-  }
+  };
 
-
-  
   // Handle Remove Modal function
   const handleRemoveModal = () => {
     setShowModal(false);
-    setTaskToUpdate(null)
+    setTaskToUpdate(null);
   };
-
-
 
   // Handle Item delete function
   const handleDeleteItem = (itemId) => {
-    setTasks(
-      tasks.filter((newTask) => newTask.id !== itemId)
-    )
-  }
+    const updated = allTasks.filter((task) => task.id !== itemId);
 
+    setTasks(updated);
+    setAllTasks(updated);
+  };
 
   // Handle delete all item function
   const handleDeleteAllItem = () => {
     setTasks([]);
+    setAllTasks([]);
     // tasks.length = 0;
     // setTasks([...tasks]);
-  }
-
+  };
 
   // Handle is favorite toggle function
   const handleIsFavorite = (taskId) => {
-    const taskIndex = tasks.findIndex((task) => task.id === taskId);
+    const updated = allTasks.map((task) =>
+      task.id === taskId ? { ...task, isFavorite: !task.isFavorite } : task
+    );
 
-    const newTasks = [...tasks];
-    newTasks[taskIndex].isFavorite = !newTasks[taskIndex].isFavorite
-    
-    setTasks(newTasks)
-  }
-
+    setTasks(updated);
+    setAllTasks(updated);
+  };
 
   // Search handle function
   const handleSearch = (searchTerm) => {
-    const filtered = tasks.filter((task) => {
-      return task.title.toLowerCase().includes(searchTerm.toLowerCase())
-    });
-    
+    if (searchTerm.trim() === "") {
+      setTasks(allTasks);
+      return;
+    }
+
+    const filtered = allTasks.filter((task) =>
+      task.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     setTasks(filtered);
-  }
-
-
+  };
 
   return (
     <>
@@ -117,18 +112,21 @@ const TaskBoard = () => {
           <SearchForm onSearch={handleSearch} />
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-white shadow-xl border border-neutral-200 px-6 py-8 md:px-9 md:py-10">
-            <TaskAction onHandleShowModal={handleShowModal} onHandleDeleteAllItem={handleDeleteAllItem} />
+            <TaskAction
+              onHandleShowModal={handleShowModal}
+              onHandleDeleteAllItem={handleDeleteAllItem}
+            />
 
-            {
-             tasks.length > 0 ? (
-              <TaskList 
-                tasks={tasks} 
+            {tasks.length > 0 ? (
+              <TaskList
+                tasks={tasks}
                 onHandleEditTask={handleEditTask}
-                onHandleDeleteItem={handleDeleteItem} 
-                onHandleIsFavorite={handleIsFavorite} 
+                onHandleDeleteItem={handleDeleteItem}
+                onHandleIsFavorite={handleIsFavorite}
               />
-              )  :  <NoDataFound />
-            }
+            ) : (
+              <NoDataFound />
+            )}
           </div>
         </div>
       </section>

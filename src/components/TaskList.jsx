@@ -1,6 +1,6 @@
 import { SquarePen, Star, Trash } from "lucide-react";
 
-const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite }) => {
+const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite, onHandleEditTask }) => {
   return (
     <div className="overflow-auto">
       <table className="table-fixed overflow-auto xl:w-full">
@@ -25,7 +25,7 @@ const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite }) => {
           </tr>
         </thead>
 
-        <tbody>
+        <tbody className="max-h-[300px] overflow-y-auto">
           {tasks.map((task) => (
             <tr
               key={task.id}
@@ -96,7 +96,10 @@ const TaskList = ({ tasks, onHandleDeleteItem, onHandleIsFavorite }) => {
                     <Trash className="size-[18px]" />
                   </button>
 
-                  <button className="w-8 h-8 rounded-[6px] flex justify-center items-center text-white active:scale-95 bg-blue-500 hover:bg-blue-600">
+                  <button 
+                    className="w-8 h-8 rounded-[6px] flex justify-center items-center text-white active:scale-95 bg-blue-500 hover:bg-blue-600"
+                    onClick={() => onHandleEditTask(task)}
+                  >
                     <SquarePen className="size-[18px]" />
                   </button>
                 </div>

@@ -38,6 +38,13 @@ const TaskBoard = () => {
   };
 
 
+  // handle Edit Taks
+  const handleEditTask = (task) => {
+    console.log(task);
+    
+    
+  }
+
   // Handle Item delete function
   const handleDeleteItem = (itemId) => {
     setTasks(
@@ -81,7 +88,12 @@ const TaskBoard = () => {
 
             {
              tasks.length > 0 ? (
-              <TaskList tasks={tasks} onHandleDeleteItem={handleDeleteItem} onHandleIsFavorite={handleIsFavorite} />
+              <TaskList 
+              tasks={tasks} 
+              onHandleEditTask={handleEditTask}
+              onHandleDeleteItem={handleDeleteItem} 
+              onHandleIsFavorite={handleIsFavorite} 
+              />
               )  :  <NoDataFound />
             }
           </div>

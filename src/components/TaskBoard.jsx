@@ -51,8 +51,6 @@ const TaskBoard = () => {
   const handleEditTask = (task) => {
     setTaskToUpdate(task)
     setShowModal(true);
-
-    console.log(task);
   }
 
 
@@ -103,7 +101,7 @@ const TaskBoard = () => {
         />
       )}
 
-      <section className="mb-20" id="tasks">
+      <section className="" id="tasks">
         <div className="container">
           <SearchForm />
 

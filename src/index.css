@@ -2,7 +2,7 @@
 
 @layer components {
   .container {
-    @apply mx-auto max-w-[1600px] px-4 py-[120px];
+    @apply mx-auto max-w-[1600px] px-4 py-[80px];
   }
 }
 

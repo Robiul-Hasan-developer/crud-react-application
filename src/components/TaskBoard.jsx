@@ -90,6 +90,17 @@ const TaskBoard = () => {
   }
 
 
+  // Search handle function
+  const handleSearch = (searchTerm) => {
+    const filtered = tasks.filter((task) => {
+      return task.title.toLowerCase().includes(searchTerm.toLowerCase())
+    });
+    
+    setTasks(filtered);
+  }
+
+
+
   return (
     <>
       {showModal && <Overlay onHandleRemoveModal={handleRemoveModal} />}
@@ -103,7 +114,7 @@ const TaskBoard = () => {
 
       <section className="" id="tasks">
         <div className="container">
-          <SearchForm />
+          <SearchForm onSearch={handleSearch} />
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-white shadow-xl border border-neutral-200 px-6 py-8 md:px-9 md:py-10">
             <TaskAction onHandleShowModal={handleShowModal} onHandleDeleteAllItem={handleDeleteAllItem} />
@@ -111,10 +122,10 @@ const TaskBoard = () => {
             {
              tasks.length > 0 ? (
               <TaskList 
-              tasks={tasks} 
-              onHandleEditTask={handleEditTask}
-              onHandleDeleteItem={handleDeleteItem} 
-              onHandleIsFavorite={handleIsFavorite} 
+                tasks={tasks} 
+                onHandleEditTask={handleEditTask}
+                onHandleDeleteItem={handleDeleteItem} 
+                onHandleIsFavorite={handleIsFavorite} 
               />
               )  :  <NoDataFound />
             }
@@ -126,53 +137,3 @@ const TaskBoard = () => {
 };
 
 export default TaskBoard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-==================== Kow more details about this?
-* event loop details.
-* tell me details about mutable & immutable value.
-* React component lifecycle
-* How react restory redering component?
-* how javascript execute the code
-* deep copy & shallow copy
-* cookie & sessionStorage -> Computer
-* what exicutation context
-* prototype
-* HOC ki??
-* hoisting ki??
-* Redux??
-
-=================== Aamke aro ki ki janete hobe =================
-Javascript -> OOP -> Design Pattern -> 
- */
